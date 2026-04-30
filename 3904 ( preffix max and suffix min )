@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int firstStableIndex(vector<int>& nums, int k) {
+        int n = nums.size();
+        long long mx = nums[0];
+        vector<long long> prefMax(n);
+        for(int i =0;i<n;i++){
+            mx = max(mx,(long long)nums[i]);
+            prefMax[i] = mx;
+        }
+        
+        vector<long long>suffMin(n);
+        long long mn = nums[n-1];
+        for(int i=n-1;i>=0;i--){
+            mn=min(mn,(long long)nums[i]);
+            suffMin[i]=mn;
+        }
+        
+        for(int i=0;i<n;i++){
+            if((prefMax[i]-suffMin[i])<=k) return i;
+        }
+        return -1;
+    }
+};
