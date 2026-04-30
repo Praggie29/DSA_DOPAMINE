@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int compareBitonicSums(vector<int>& nums) {
+        int n=nums.size();
+        long long ascendingPartSum=0;
+        long long descendingPartSum=0;
+        int maxEle = *max_element(nums.begin() , nums.end());
+        int maxEleIndx;
+        for(int i=0;i<n;i++){
+            if(nums[i]==maxEle){
+                maxEleIndx=i;
+                break;
+            }
+        }
+        for(int i = 0 ; i<=maxEleIndx ; i++) {
+            ascendingPartSum+= nums[i];
+        }
+        
+        for(int i=maxEleIndx ; i<n ; i++) {
+            descendingPartSum += nums[i];
+        }
+        
+        if(ascendingPartSum > descendingPartSum) return 0;
+        else if(descendingPartSum > ascendingPartSum ) return 1;
+        return -1;
+    }
+};
