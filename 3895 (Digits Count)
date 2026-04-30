@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int countDigitOccurrences(vector<int>& nums, int digit) {
+        int n=nums.size();
+        int totalDigs=0;
+        for(int i=0;i<n;i++){
+            int store=nums[i];
+            while(store){
+                int rem=store%10;
+                if(rem==digit) totalDigs+=1;
+                store=store/10;
+            }
+        }
+        return totalDigs;
+    }
+};
