@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int firstStableIndex(vector<int>& nums, int k) {
+        int n = nums.size();
+        for ( int i = 0 ; i < n ; i++ ){
+            int maxiEle = INT_MIN;
+            int miniEle = INT_MAX;
+            for (int j=0 ; j<=i ; j++){
+                maxiEle = max(maxiEle, nums[j]);
+            }
+            
+            for(int k=i;k<n;k++){
+                miniEle = min(miniEle,nums[k]);
+            }
+            if(maxiEle-miniEle<=k) return i;
+        }
+       return -1;
+    }
+};
