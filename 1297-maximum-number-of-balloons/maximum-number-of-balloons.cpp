@@ -1,14 +1,23 @@
 class Solution {
 public:
     int maxNumberOfBalloons(string text) {
-        int b = 0, a = 0, l = 0, o = 0, n = 0;
-        for (char ch : text) {
-            if (ch == 'b') b++;
-            else if (ch == 'a') a++;
-            else if (ch == 'l') l++;
-            else if (ch == 'o') o++;
-            else if (ch == 'n') n++;
+        vector <int> freq ( 5 , 0 );
+        for ( int i = 0 ; i < text.size() ; i ++ ) {
+            if ( text[i] == 'b' ) freq[0]++;
+            else if ( text[i] == 'a' ) freq[1]++;
+            else if ( text[i] == 'l' ) freq[2]++;
+            else if ( text[i] == 'o' ) freq[3]++;
+            else if ( text[i] == 'n' ) freq[4]++;
         }
-        return min({b, a, l / 2, o / 2, n});
+        int mini = INT_MAX;
+        for ( int i = 0 ; i < 5 ; i ++ ) {
+            if ( i == 2 || i == 3 ) {
+                mini = min ( mini , freq[i] / 2 );
+            }
+            else {
+                mini = min ( mini , freq[i] );
+            }
+        }
+        return mini;
     }
 };
